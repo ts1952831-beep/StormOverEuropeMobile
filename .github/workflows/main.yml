@@ -1,0 +1,27 @@
+name: Build Android APK
+
+on:
+workflow_dispatch:
+push:
+branches: [main]
+
+jobs:
+build:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout project
+uses: actions/checkout@v4
+
+```
+  - name: Build APK
+    uses: barichello/godot-ci:4.3.0
+    with:
+      args: |
+        godot --headless --path . --export-debug "Android" build/StormOverEuropeMobile.apk
+
+  - name: Upload APK
+    uses: actions/upload-artifact@v4
+    with:
+      name: StormOverEuropeMobile-APK
+      path: build/StormOverEuropeMobile.apk
+```
