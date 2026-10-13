@@ -3,7 +3,8 @@ name: Build Android APK
 on:
 workflow_dispatch:
 push:
-branches: [main]
+branches:
+- main
 
 jobs:
 build:
@@ -13,11 +14,16 @@ steps:
 uses: actions/checkout@v4
 
 ```
-  - name: Build APK
+  - name: Check project files
+    run: |
+      echo "Checking project files..."
+      ls -la
+      test -f project.godot
+
+  - name: Build Android APK
     uses: barichello/godot-ci:4.3.0
     with:
-      args: |
-        godot --headless --path . --export-debug "Android" build/StormOverEuropeMobile.apk
+      args: --headless --path . --export-debug "Android" build/StormOverEuropeMobile.apk
 
   - name: Upload APK
     uses: actions/upload-artifact@v4
