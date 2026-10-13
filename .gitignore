@@ -1,0 +1,14 @@
+# Godot generated/imported files
+.godot/
+.import/
+export.cfg
+export_presets.cfg.tmp
+
+# Build output is uploaded as a GitHub Actions artifact
+build/*
+!build/.gitkeep
+
+# Android signing secrets must never be committed
+*.keystore
+*.jks
+.env
